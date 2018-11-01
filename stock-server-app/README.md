@@ -3,6 +3,7 @@ stock-server-app (server):
 
 The server is developed in Spring Boot framework & it uses CouchDB NoSQL Database.
 1. 	Run the CouchDB database:
+
 	./run-couchdb.sh
 
 2. 	Import csv files: The downloaded csv files are available in the classpath folder, run the following command to import them:
