@@ -52,7 +52,10 @@ angular.module('stockApp')
                     var result = StockService.prepareChartData(types, data);
                     var bse = result["bse"],
                         dji = result["dji"];
-                    var annotations = result["annotation"];    
+                    var annotations = result["annotation"]; 
+                    if (! annotations) {
+                        annotations = [];
+                    }   
                     refreshChart(bse, dji, annotations);
                 },
                 function(reason) {
@@ -100,7 +103,10 @@ angular.module('stockApp')
                     type: 'spline',
                     zoomType: 'x',
                     panning: true,
-                    panKey: 'shift'
+                    panKey: 'shift',
+                    scrollablePlotArea: {
+                      minWidth: 600
+                    }
                 },
                 "colors": [
                     "#7cb5ec",

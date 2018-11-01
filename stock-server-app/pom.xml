@@ -3,11 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.maqbool</groupId>
 	<artifactId>stockserverapp</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-
-	<properties>
-		<start-class>com.maqbool.stock.Application</start-class>
-	</properties>
+	<version>1.0.0</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -41,15 +37,12 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.2.3</version>
-			<scope>test</scope>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.25</version>
 		</dependency>
 
 
@@ -88,5 +81,25 @@
 			</snapshots>
 		</repository>
 	</repositories>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>DataImport</id>
+						<goals>
+							<goal>java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>com.maqbool.stock.DataImporter</mainClass>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

@@ -1,0 +1,1 @@
+docker run -d -p 5984:5984 -v $pwd/couch-data:/opt/couchdb/data --name couchdb couchdb

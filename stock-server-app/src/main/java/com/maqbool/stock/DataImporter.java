@@ -13,6 +13,8 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.cloudant.client.api.ClientBuilder;
 import com.cloudant.client.api.CloudantClient;
@@ -26,11 +28,19 @@ import com.maqbool.stock.commons.Util;
 import com.maqbool.stock.dao.MapDeserializerDoubleAsIntFix;
 import com.maqbool.stock.exceptions.ServiceException;
 
+/**
+ * The DataImporter
+ * Imports data from the csv files (BSE, DJI)
+ * @author maqbool
+ *
+ */
 public class DataImporter {
+
+	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	private static final String COUCH_DB_URL = "http://localhost:5984/";
 	
-	private static final String COUCH_DB = "stock1";
+	private static final String COUCH_DB = "stock";
 
 	private static final int BATCH_SIZE = 10000;
 
@@ -53,6 +63,7 @@ public class DataImporter {
 	}
 	
 	private String[] columns = { "timestamp:date", "open:double", "high:double", "low:double", "close:double" };
+	
 	private void run(String[] args) {
 		try {
 			GsonBuilder builder = new GsonBuilder();
@@ -62,26 +73,39 @@ public class DataImporter {
 					.build();
 			String resourcesPath = getClass().getResource("/").getPath(); 
 			
-			importFile("bse", new File(resourcesPath + BSE_FILE), columns, DEFAULT_SEPARATOR, DATE_FORMAT_BSE);
-			importFile("dji", new File(resourcesPath + DJI_FILE), columns, DEFAULT_SEPARATOR, DATE_FORMAT_DJI);
-			
-			System.exit(0);
+			try {
+				client.createDB(COUCH_DB);
+				runTasksPostDbCreation(getDb());
+				importFile("bse", new File(resourcesPath + BSE_FILE), columns, DEFAULT_SEPARATOR, DATE_FORMAT_BSE);
+				importFile("dji", new File(resourcesPath + DJI_FILE), columns, DEFAULT_SEPARATOR, DATE_FORMAT_DJI);
+				
+				System.exit(0);
+			} catch (Exception e) {
+				throw new RuntimeException("the database " + COUCH_DB + " already exists, please delete & try again...", e);
+			}
 		} catch (Exception e) {
 			System.err.println("Error!!" +  e.getMessage());
 		}
 	}
-	
+	/**
+	 * Imports the file with given type.
+	 * @param type type of the document
+	 * @param file file to import data from
+	 * @param columns the column attributes along with data type. e.g., "timestamp:date"
+	 * @param separator e.g., COMMA
+	 * @param dateFormat format
+	 * @throws Exception
+	 */
 	private void importFile(String type, File file, String[] columns, String separator, String dateFormat)
 			throws Exception {
-		System.out.println("about to import data from " + file.getName());
+		logger.info("about to import data from " + file.getName());
 		LineIterator it = null;
 		List<Map> documents = new ArrayList<Map>();
 		try {
 			it = FileUtils.lineIterator(file, "UTF-8");
 			int batchCount = 1;
 			
-			Database db = getDb(COUCH_DB);
-
+			Database db = getDb();
 			while (it.hasNext()) {
 				String line = it.nextLine();
 				String[] columnsData = line.split(Pattern.quote(separator));
@@ -115,14 +139,14 @@ public class DataImporter {
 				documents.add(document);
 				int size = documents.size();
 				if (size % BATCH_SIZE == 0) {
-					System.out.println("uploading batch#" + batchCount + " of " + BATCH_SIZE);
+					logger.info("uploading batch#" + batchCount + " of " + BATCH_SIZE);
 					bulkUpsert(db, documents);
 					documents = new ArrayList<Map>();
 					batchCount++;
 				}
 			}
 			if (!Util.nullOrEmpty(documents)) {
-				System.out.println("last batch#" + batchCount + " of " + documents.size());
+				logger.info("last batch#" + batchCount + " of " + documents.size());
 				bulkUpsert(db, documents);
 			}
 		} catch (Exception e) {
@@ -132,14 +156,11 @@ public class DataImporter {
 				LineIterator.closeQuietly(it);
 		}
 	}
+	
 	private Map<String, Object> getDocument(String type) {
 		Map<String, Object> content = new HashMap<String, Object>();
 		content.put(Constants.TYPE, type);
 		return content;
-	}
-
-	private void save(Database db, Map document) throws Exception {
-		db.save(document); 
 	}
 	
 	private int bulkUpsert(Database db, List<Map> documents) throws Exception {
@@ -148,16 +169,8 @@ public class DataImporter {
 		return size;
 	}
 
-	private Database getDb(String ds) {
-		Database db = null;
-		try {
-			client.createDB(ds);
-			db = client.database(ds, false);
-			runTasksPostDbCreation(db);
-		} catch (Exception e) {
-			db = client.database(ds, false);
-		}
-		
+	private Database getDb() {
+		Database db = client.database(COUCH_DB, false);
 		return db;
 	}
 

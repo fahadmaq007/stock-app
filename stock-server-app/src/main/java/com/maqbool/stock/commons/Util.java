@@ -94,17 +94,14 @@ public class Util {
 	public static long convertPeriodToTimestamp(String period) {
 		ZonedDateTime now = ZonedDateTime.now();
 		long millis = now.minusMonths(1).toInstant().toEpochMilli();
-		System.out.println(period + " " + millis + " " + periods.contains(period));
 		if (periods.contains(period)) {
 			int num = Integer.parseInt("" + period.charAt(0));
 			char duration = period.charAt(1);
 			switch (duration) {
 			case 'M': 
-				System.out.println(num + " months");
 				millis = now.minusMonths(num).toInstant().toEpochMilli(); break;
 			
 			case 'Y': 
-				System.out.println(num + " years");
 				millis = now.minusYears(num).toInstant().toEpochMilli(); break;
 			}
 		}

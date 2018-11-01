@@ -116,7 +116,7 @@ public class CouchDao implements IDao {
 			JsonObject indexObject = getIndexObject(specs, sort, fields, page, limit);
 			
 			String query = indexObject.toString();
-			System.out.println("query is: " + query);
+			logger.info("query is: " + query);
 			QueryResult<Map<String, Object>> result = db.query(query, MAP_CLASS);
 			return result.getDocs();
 		} catch (Exception e) {
