@@ -1,0 +1,1 @@
+mvn -f import-data-pom.xml exec:java -Dexec.mainClass="com.maqbool.stock.DataImporter" -Dexec.classpathScope=runtime

@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <script>
+        	var callbackResponseServ = function () {
+      			var callbackResponse = (document.URL).split("#")[1];
+      			console.log(callbackResponse);
+      			var responseParameters = (callbackResponse).split("&");
+      			var parameterMap = [];
+      			for (var i = 0; i < responseParameters.length; i++) {
+        			parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
+      			}
+      			if (parameterMap.id_token !== undefined && parameterMap.id_token !== null) {
+        			var token = {
+          				id_token: parameterMap.id_token
+        			};
+                    window.localStorage.setItem("token", JSON.stringify(token));
+        			
+        			if(window.location.port == 9000){
+                    	window.location.href = "/#/auth";
+                	} else {
+                    	window.location.href = "/admin-console/#/auth";
+                	}
+            	} else {
+                	console.error("Problem authenticating");
+                	if (window.location.port == 9000) {
+                   		window.location.href = "/#/login"; 
+                	} else {
+                   		window.location.href = "/admin-console/#/login"; 
+                	}
+            	}
+    		}
+    		setTimeout(callbackResponseServ, 200);
+        </script>
+    </head>
+    <body>Redirecting...</body>
+</html>

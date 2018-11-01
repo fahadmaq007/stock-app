@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+    <head>
+        <script>
+        	var callbackResponseServ = function () {
+                if (window.location.port == 9000) {
+                   	window.location.href = "/#/login"; 
+                } else {
+                   	window.location.href = "/admin-console/#/login"; 
+                }
+    		}
+    		setTimeout(callbackResponseServ, 200);
+        </script>
+    </head>
+    <body>Redirecting...</body>
+</html>
+

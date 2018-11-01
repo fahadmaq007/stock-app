@@ -1,0 +1,36 @@
+<div ng-init="init()">
+	<div class="row">        
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+        	<div class="card">
+	        	<h2 class="title center">BSE & DJI Stocks</h2>
+
+	        	<div class="row"> 
+	        	<hr/>       
+        			<div class="col-sm-12 col-md-6">
+			        	<div>Period: 
+			        		<span ng-repeat="period in periods" ng-click="onPeriodChange($index)" class="selectable" ng-class="{ 'selected' : period == selectedPeriod}">
+			        		{{period}}</span>
+			        	</div>
+			        </div>	
+
+			        <div class="col-sm-12 col-md-6">
+			        	<div class="pull-right">Type: 
+			        	 <span ng-repeat="type in types" ng-click="onTypeChange($index)" class="selectable" ng-class="{ 'selected' : selectedTypes.indexOf(type) > -1}">
+			        		{{type}}
+			        	 </span>
+			        	</div>
+			        </div>
+			    </div>
+
+	        	<!-- div class="form">
+        			<div class="form-header">Add annotation</div>
+        			<label for="title">Title:</label>
+            		<input id="title" type="text" ng-model="newAnnotation.text" />
+        		</div>	 -->
+
+	        	<div id="container"></div>
+			</div>    
+        </div>
+    </div>
+</div>
+

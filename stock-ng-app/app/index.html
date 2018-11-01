@@ -1,0 +1,66 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Stock App</title>
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+
+    <link rel="stylesheet" href="styles/main.css">
+  </head>
+  <body ng-app="stockApp">
+
+    <!-- Add your site or application content here -->
+    <div class="container site-header center">
+      <div class="site-header-holder">
+        <div class="site-heading">
+          <h2 class="page-title"></h2>
+        </div>
+      </div>
+      
+    </div>
+    <div  class="container">
+        <div ui-view></div>
+    </div>
+    <!-- footer -->
+    <div class="container site-footer">
+      <div class="status-holder">
+        <div class="status-message">
+          
+        </div>
+      </div>
+    </div>
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/annotations.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="http://sibeeshpassion.com/content/scripts/drilldown.js"></script>
+    
+
+    <script src="scripts/customEvents.js"></script>
+
+
+    <script src="scripts/config.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/common/services/core-serv.js"></script>
+    <script src="scripts/common/services/url-service.js"></script>
+    <script src="scripts/stock/controllers/stock-ctrl.js"></script>
+    <script src="scripts/stock/services/stock-serv.js"></script>
+    
+
+</body>
+</html>

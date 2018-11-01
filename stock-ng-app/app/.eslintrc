@@ -1,0 +1,57 @@
+{
+  "globals": {
+    "ionic": false,
+    "angular": false,
+    "window": false,
+    "cordova": false,
+    "navigator": false,
+    "_": false
+  },
+  "rules": {
+    "indent": [
+      2,
+      4,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "space-before-function-paren": [
+      2,
+      {
+        "anonymous": "always",
+        "named": "never"
+      }
+    ],
+    "comma-dangle": [
+      2
+    ],
+    "keyword-spacing": [
+      2
+    ],
+    "comma-spacing": [
+      2
+    ],
+    "no-underscore-dangle": [
+      0
+    ],
+    "no-console": [
+      0,
+      { "allow": ["warn", "error"] }
+    ]
+
+  },
+
+  "env": {
+    "browser": true,
+    "mocha": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "extends": [
+    "eslint:recommended"
+  ]
+}
+
+
