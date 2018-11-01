@@ -37,7 +37,9 @@ public class DocumentServiceImpl implements DocumentService {
 	@Override
 	public Map<String, Object> store(Map<String, Object> s) throws ServiceException {
 		try {
-			logger.info("storing stock... " + s.get(Constants._ID));
+			System.out.println("storing stock... " + s.get(Constants._ID));
+			s.put(Constants.TIMESTAMP, System.currentTimeMillis());
+			System.out.println(s);
 			return dao.upsert(s);
 		} catch (DataAccessException e) {
 			throw new ServiceException(e.getMessage(), e);

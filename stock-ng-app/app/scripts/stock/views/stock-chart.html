@@ -2,19 +2,19 @@
 	<div class="row">        
         <div class="col-sm-12 col-md-10 col-md-offset-1">
         	<div class="card">
-	        	<h2 class="title center">BSE & DJI Stocks</h2>
+	        	<h2 class="bold center">BSE & DJI Stocks</h2>
+	        	<hr/>    
 
 	        	<div class="row"> 
-	        	<hr/>       
         			<div class="col-sm-12 col-md-6">
-			        	<div>Period: 
+			        	<div><span class="bold">Period:</span> 
 			        		<span ng-repeat="period in periods" ng-click="onPeriodChange($index)" class="selectable" ng-class="{ 'selected' : period == selectedPeriod}">
 			        		{{period}}</span>
 			        	</div>
 			        </div>	
 
 			        <div class="col-sm-12 col-md-6">
-			        	<div class="pull-right">Type: 
+			        	<div class="pull-right"><span class="bold">Type:</span> 
 			        	 <span ng-repeat="type in types" ng-click="onTypeChange($index)" class="selectable" ng-class="{ 'selected' : selectedTypes.indexOf(type) > -1}">
 			        		{{type}}
 			        	 </span>
@@ -22,11 +22,13 @@
 			        </div>
 			    </div>
 
-	        	<!-- div class="form">
-        			<div class="form-header">Add annotation</div>
-        			<label for="title">Title:</label>
+			    <hr/>
+
+	        	<div class="form">
+        			<div class="form-header">Annotation Title:</div>
             		<input id="title" type="text" ng-model="newAnnotation.text" />
-        		</div>	 -->
+            		<div class="small-note">(Key in the title & select the point in the chart below)</div> 
+        		</div>	
 
 	        	<div id="container"></div>
 			</div>    

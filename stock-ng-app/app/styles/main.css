@@ -1,10 +1,12 @@
 @font-face{font-family:'Roboto Thin';src:url('../fonts/roboto-thin-webfont.eot');src:url('../fonts/roboto-thin-webfont.eot?#iefix') format('embedded-opentype'),url('../fonts/roboto-thin-webfont.woff2') format('woff2'),url('../fonts/roboto-thin-webfont.woff') format('woff'),url('../fonts/roboto-thin-webfont.ttf') format('truetype'),url('../fonts/roboto-thin-webfont.svg#robotothin') format('svg');font-weight:normal;font-style:normal}
 
+@font-face{font-family:'Roboto';src:url('../fonts/roboto-regular-webfont.eot');src:url('../fonts/roboto-regular-webfont.eot?#iefix') format('embedded-opentype'),url('../fonts/roboto-regular-webfont.woff2') format('woff2'),url('../fonts/roboto-regular-webfont.woff') format('woff'),url('../fonts/roboto-regular-webfont.ttf') format('truetype'),url('../fonts/roboto-regular-webfont.svg#robotothin') format('svg');font-weight:normal;font-style:normal}
+
 html, body {
 	font-family: 'Roboto Thin';
 }
-.title {
-    font-weight: bold;
+.bold {
+    font-family: 'Roboto';
 }
 .center {
     text-align: center;
@@ -18,14 +20,26 @@ html, body {
 
 .selectable {
 	padding: 3px 3px;
+    cursor: pointer;
 }
 .selected {
     border-bottom: 2px solid blueviolet;
     box-shadow: 0 4px 4px 0 rgba(0,0,0,0.6);
-    font-weight: bold;
+    font-family: 'Roboto';
     margin-left: 3px;
 }
 #container {
     height: 450px;
     margin: 1em auto;
+}
+.small-note {
+    font-size: 11px;
+}
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

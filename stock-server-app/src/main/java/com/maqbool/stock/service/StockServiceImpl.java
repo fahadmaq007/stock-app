@@ -28,10 +28,10 @@ public class StockServiceImpl extends DocumentServiceImpl implements StockServic
 	public List<Map<String, Object>> listStock(String period, String[] types) throws ServiceException {
 		try {
 			long timestamp = Util.convertPeriodToTimestamp(period);
-			String[] filters = { "timestamp:GT:" + timestamp };
+			String[] filters = { "timestamp:GTE:" + timestamp };
 			String[] sort = { "timestamp" };		
 			logger.info("listing stocks after..." + timestamp);
-			return dao.listDocuments(filters, sort, 1, Integer.MAX_VALUE);
+			return dao.listDocuments(filters, sort, 1, Integer.MAX_VALUE - 1);
 		} catch (DataAccessException e) {
 			throw new ServiceException(e.getMessage(), e);
 		}

@@ -17,6 +17,8 @@ public class Constants {
 	public static final String _ID = "_id";
 
 	public static final String TYPE = "type";
+
+	public static final String TIMESTAMP = "timestamp";
 	
 	
 }
