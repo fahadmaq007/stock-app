@@ -5,6 +5,8 @@ The server is developed in Spring Boot framework & it uses CouchDB NoSQL Databas
 1. 	Run the CouchDB database:
 
 	./run-couchdb.sh
+	
+	Your CouchDB instance should be running at http://localhost:5984/_utils/
 
 2. 	Import csv files: The downloaded csv files are available in the classpath folder, run the following command to import them:
 	
