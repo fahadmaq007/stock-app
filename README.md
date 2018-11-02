@@ -23,3 +23,5 @@ It has client & server application.
 * stock-ng-app (client): The client app is written in Angular 1, the charts are developed using highcharts (https://www.highcharts.com/)
 
 * stock-server-app (server): The server is developed using Spring Boot & Core framework. 
+
+Demo & the usage video is shared at https://youtu.be/7guL71_8lRU
