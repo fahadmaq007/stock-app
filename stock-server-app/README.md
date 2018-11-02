@@ -4,7 +4,7 @@ stock-server-app (server):
 The server is developed in Spring Boot framework & it uses CouchDB NoSQL Database.
 1. 	Run the CouchDB database:
 
-	./run-couchdb.sh
+	./run-couchdb.sh (the script assumes that the docker is installed, if not setup the database however it is convenient to you)
 	
 	Your CouchDB instance should be running at http://localhost:5984/_utils/
 
